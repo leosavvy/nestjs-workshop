@@ -11,7 +11,7 @@ export class ShoeController {
 
     @Get("/:shoeId")
     async findShoeById(@Param("shoeId") shoeId): Promise<any> {
-        return database.Shoes.filter((s) => s.id === shoeId);
+        return database.Shoes.find((s) => s.id === shoeId);
     }
 
     // Wildcards para las rutas

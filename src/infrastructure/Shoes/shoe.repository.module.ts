@@ -1,9 +1,9 @@
 import { Module } from "@nestjs/common";
-import { ShoeRepository } from "./shoe.repository";
+import { ShoeRepositoryProvider } from "./shoe.repository.provider";
 
 @Module({
     imports: [],
-    providers: [ShoeRepository],
-    exports: [],
+    providers: [ShoeRepositoryProvider],
+    exports: [ShoeRepositoryProvider],
 })
 export class ShoeRepositoryModule {}

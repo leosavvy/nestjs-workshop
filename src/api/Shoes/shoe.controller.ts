@@ -1,20 +1,38 @@
-import { Controller, Get, Param, Query, Req } from "@nestjs/common";
+import {
+    Controller,
+    Get,
+    Logger,
+    Param,
+    ParseIntPipe,
+    Query,
+    Req,
+} from "@nestjs/common";
 import { Request } from "express";
+import { ShoeService } from "src/domain/Shoes/shoe.service";
 import { database } from "src/infrastructure/Database/database";
 
 @Controller("shoe")
 export class ShoeController {
+    constructor(private readonly shoeService: ShoeService) {}
+
     @Get("/")
     async findAllShoes(): Promise<any> {
-        return database.Shoes;
+        return this.shoeService.getAllShoes();
+
+        // return database.Shoes;
     }
 
     @Get("/:shoeId")
-    async findShoeById(@Param("shoeId") shoeId): Promise<any> {
+    async findShoeById(
+        @Param("shoeId", new ParseIntPipe()) shoeId: number,
+    ): Promise<any> {
         return database.Shoes.find((s) => s.id === shoeId);
     }
 
     // Wildcards para las rutas
+    // example/other
+    // example/test
+    // example/teasdasfawdafewawdadst
     @Get("example/other|te*st")
     async routeWildCard(): Promise<any> {
         return "Upa cachete!";

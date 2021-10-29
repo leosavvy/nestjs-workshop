@@ -1,9 +1,10 @@
 import { Injectable } from "@nestjs/common";
+import { IShoeRepository } from "src/domain/Shoes/i-shoe.repository";
 import { database } from "../Database/database";
 
 @Injectable()
-export class ShoeRepository {
-    async getAllShoes() {
+export class ShoeRepository implements IShoeRepository {
+    async getAllShoes(): Promise<Array<any>> {
         return new Promise((resolve) =>
             setTimeout(() => resolve(database.Shoes), Math.random() * 1000),
         );
